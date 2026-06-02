@@ -804,10 +804,10 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <button class="btn btn-primary" onclick="guardarResultados()">💾 GUARDAR Y RECALCULAR PUNTOS</button>
       </div>
 
-      <!-- Marcadores reales Ecuador y Panamá -->
+      <!-- Marcadores reales fase de grupos -->
       <div class="card">
-        <div class="card-title">⚽ Resultados Reales — Ecuador, Panamá &amp; USA</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Ingresa el marcador real de cada partido. Al guardar se suman <strong>5 puntos</strong> por cada marcador que coincida con el pronóstico del colaborador (Ecuador, Panamá y Estados Unidos).</p>
+        <div class="card-title">⚽ Marcadores Reales — Fase de Grupos</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Ingresa el marcador real de cada partido de Ecuador, Panamá y Estados Unidos. Se suman <strong>5 puntos</strong> por cada resultado exacto.</p>
 
         <!-- Ecuador -->
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
@@ -848,7 +848,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         </div>
         <div class="result-slots" style="margin-bottom:16px;">
           <div class="form-group">
-            <label style="font-size:12px;">🇬🇭 Ghana vs Panamá 🇵🇦<br><span style="color:var(--muted);font-size:11px;">Mié 17 Jun · 8:00 PM ECU</span></label>
+            <label style="font-size:12px;">🇬🇭 Ghana vs Panamá 🇵🇦<br><span style="color:var(--muted);font-size:11px;">Mié 17 Jun · 7:00 PM ECU</span></label>
             <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
               <input type="number" id="real-pan1h" min="0" max="20" value="" placeholder="0" style="width:60px;text-align:center;font-size:20px;font-weight:900;padding:6px;">
               <span style="font-size:18px;font-weight:900;color:var(--muted);">:</span>
@@ -874,7 +874,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         </div>
 
         <!-- Estados Unidos -->
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;margin-top:18px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
           <span style="font-size:18px;">🇺🇸</span>
           <span style="font-weight:900;font-family:'Nunito',sans-serif;font-size:14px;color:#1A3A8A;">Estados Unidos</span>
         </div>
@@ -909,76 +909,6 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <button class="btn btn-primary" onclick="guardarMarcadoresReales()">💾 GUARDAR MARCADORES Y RECALCULAR</button>
       </div>
 
-      <!-- Diagnóstico de conexión -->
-      <div class="card" style="margin-top:18px;">
-        <div class="card-title">🔌 Diagnóstico de Conexión</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6;">
-          Si la lista no carga, usa este diagnóstico para identificar el problema exacto.
-        </p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-          <button class="btn btn-outline" onclick="testConexion()">🧪 Probar conexión</button>
-          <button class="btn btn-outline" onclick="testConexionPost()">📤 Probar POST</button>
-        </div>
-        <div id="diag-result" style="font-family:monospace;font-size:12px;background:#1e1e2e;color:#cdd6f4;padding:14px;border-radius:10px;white-space:pre-wrap;max-height:220px;overflow-y:auto;display:none;"></div>
-      </div>
-      </div>
-
-
-      <!-- Apps Script actualizado -->
-      <div class="card" style="margin-top:18px;">
-        <div class="card-title">🛠️ Apps Script — Código Actualizado (con USA)</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6;">
-          El Apps Script en Google Sheets debe incluir los campos <strong>usa1, usa2, usa3</strong> para guardar y calcular correctamente.
-          Copia el código completo y reemplázalo en <strong>Extensiones → Apps Script</strong> de tu hoja de cálculo.
-        </p>
-        <div style="position:relative;">
-          <button onclick="copiarAppsScript()" style="position:absolute;top:8px;right:8px;z-index:2;background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">📋 Copiar</button>
-          <pre id="apps-script-code" style="background:#1e1e2e;color:#cdd6f4;font-size:11px;line-height:1.7;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre;margin:0;max-height:320px;overflow-y:auto;"></pre>
-        </div>
-        <p id="copy-confirm" style="font-size:12px;color:green;margin-top:6px;display:none;">✅ ¡Código copiado al portapapeles!</p>
-
-        <!-- Estructura del sheet -->
-        <div style="margin-top:18px;">
-          <div style="font-weight:800;font-family:'Nunito',sans-serif;font-size:13px;margin-bottom:8px;color:var(--text);">📋 Estructura requerida del sheet <span style="color:var(--muted);font-weight:600;font-size:12px;">"Participantes"</span></div>
-          <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;">La fila 1 debe tener exactamente estos encabezados en este orden. Si tienes datos de participantes sin las columnas N/O/P (USA), agrégalas manualmente y pon <strong>0-0</strong> en las celdas existentes.</p>
-          <div style="overflow-x:auto;">
-            <table style="font-size:11px;border-collapse:collapse;width:100%;min-width:700px;">
-              <tr style="background:var(--red);color:#fff;">
-                <th style="padding:6px 8px;text-align:center;border:1px solid rgba(255,255,255,0.2);">Col</th>
-                <th style="padding:6px 8px;text-align:left;border:1px solid rgba(255,255,255,0.2);">Encabezado</th>
-                <th style="padding:6px 8px;text-align:left;border:1px solid rgba(255,255,255,0.2);">Descripción</th>
-                <th style="padding:6px 8px;text-align:center;border:1px solid rgba(255,255,255,0.2);">Ejemplo</th>
-              </tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">A</td><td style="padding:5px 8px;border:1px solid #eee;">nombre</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Nombre del colaborador</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">Juan Pérez</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">B</td><td style="padding:5px 8px;border:1px solid #eee;">cedula</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Cédula / SSN</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">1712345678</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">C</td><td style="padding:5px 8px;border:1px solid #eee;">pais</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">País del colaborador</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">Ecuador</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">D</td><td style="padding:5px 8px;border:1px solid #eee;">pred1</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Predicción Campeón</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">Brasil</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">E</td><td style="padding:5px 8px;border:1px solid #eee;">pred2</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Predicción Subcampeón</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">Argentina</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">F</td><td style="padding:5px 8px;border:1px solid #eee;">pred3</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Predicción 3er Puesto</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">Francia</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">G</td><td style="padding:5px 8px;border:1px solid #eee;">pred4</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Predicción 4to Puesto</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">España</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">H</td><td style="padding:5px 8px;border:1px solid #eee;">ecu1</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">ECU vs Costa de Marfil</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">2-1</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">I</td><td style="padding:5px 8px;border:1px solid #eee;">ecu2</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">ECU vs Curazao</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">3-0</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">J</td><td style="padding:5px 8px;border:1px solid #eee;">ecu3</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">ECU vs Alemania</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">1-1</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">K</td><td style="padding:5px 8px;border:1px solid #eee;">pan1</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Ghana vs Panamá</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">0-2</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">L</td><td style="padding:5px 8px;border:1px solid #eee;">pan2</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Panamá vs Croacia</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">1-0</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">M</td><td style="padding:5px 8px;border:1px solid #eee;">pan3</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Panamá vs Inglaterra</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">0-1</td></tr>
-              <tr style="background:#FFF0F4;border:2px solid #D21034;"><td style="padding:5px 8px;text-align:center;border:1px solid #D21034;font-weight:900;color:#1A3A8A;">N</td><td style="padding:5px 8px;border:1px solid #D21034;font-weight:700;color:#1A3A8A;">usa1</td><td style="padding:5px 8px;border:1px solid #D21034;color:#1A3A8A;">🇺🇸 USA vs Paraguay ← NUEVA</td><td style="padding:5px 8px;border:1px solid #D21034;text-align:center;font-weight:700;">2-0</td></tr>
-              <tr style="background:#F0F4FF;border:2px solid #1A3A8A;"><td style="padding:5px 8px;text-align:center;border:1px solid #1A3A8A;font-weight:900;color:#1A3A8A;">O</td><td style="padding:5px 8px;border:1px solid #1A3A8A;font-weight:700;color:#1A3A8A;">usa2</td><td style="padding:5px 8px;border:1px solid #1A3A8A;color:#1A3A8A;">🇺🇸 USA vs Australia ← NUEVA</td><td style="padding:5px 8px;border:1px solid #1A3A8A;text-align:center;font-weight:700;">1-1</td></tr>
-              <tr style="background:#F0F4FF;border:2px solid #1A3A8A;"><td style="padding:5px 8px;text-align:center;border:1px solid #1A3A8A;font-weight:900;color:#1A3A8A;">P</td><td style="padding:5px 8px;border:1px solid #1A3A8A;font-weight:700;color:#1A3A8A;">usa3</td><td style="padding:5px 8px;border:1px solid #1A3A8A;color:#1A3A8A;">🇺🇸 Turquía vs USA ← NUEVA</td><td style="padding:5px 8px;border:1px solid #1A3A8A;text-align:center;font-weight:700;">0-1</td></tr>
-              <tr style="background:#fff;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">Q</td><td style="padding:5px 8px;border:1px solid #eee;">puntos</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Puntaje total (calculado)</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">45</td></tr>
-              <tr style="background:#fafafa;"><td style="padding:5px 8px;text-align:center;border:1px solid #eee;font-weight:800;">R</td><td style="padding:5px 8px;border:1px solid #eee;">fecha</td><td style="padding:5px 8px;border:1px solid #eee;color:var(--muted);">Fecha de registro</td><td style="padding:5px 8px;border:1px solid #eee;text-align:center;">08/06/2026</td></tr>
-            </table>
-          </div>
-          <div style="margin-top:12px;padding:10px 14px;background:#FFF0F4;border:1.5px solid #D21034;border-radius:10px;font-size:12px;line-height:1.7;color:var(--text2);">
-            <strong>⚠️ Si ya tienes participantes registrados sin las columnas N/O/P:</strong><br>
-            1. En Google Sheets, haz clic derecho en el encabezado de la columna N → <strong>Insertar 3 columnas a la derecha</strong><br>
-            2. Escribe en N1: <code>usa1</code> · O1: <code>usa2</code> · P1: <code>usa3</code><br>
-            3. En las filas de participantes existentes, rellena N/O/P con <strong>0-0</strong><br>
-            4. Verifica que la columna Q sea <code>puntos</code> y R sea <code>fecha</code>
-          </div>
-        </div>
-      </div>
-
       <!-- Lista de participantes -->
       <div class="card">
         <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -1003,8 +933,6 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       </div>
 
     </div>
-  </div>
-        </div>
   </div>
 
   <!-- MODAL -->
@@ -1061,6 +989,7 @@ var localResultados = {r1:"",r2:"",r3:"",r4:""};
 // ─── Cálculo de puntos 100% en frontend ──────────────────────────────────
 function calcularPuntosLocal(p, res){
   if(!res) return p.puntos||0;
+  // Si no hay ningún resultado definido aún, mostrar 0
   var pts=0;
   if(res.r1 && p.pred1===res.r1) pts+=65;
   if(res.r2 && p.pred2===res.r2) pts+=30;
@@ -1227,7 +1156,14 @@ var content=document.getElementById("ranking-content");
 content.innerHTML='<div class="empty-state"><span class="empty-icon" style="font-size:28px;">⏳</span><p style="font-size:14px;color:var(--muted);">Cargando tabla…</p></div>';
 apiGet("action=getAll",function(err,data){
 if(err||!data||!data.ok){content.innerHTML='<div class="empty-state"><span class="empty-icon">⚠️</span><p style="font-size:14px;color:var(--muted);">Error al cargar. Intenta de nuevo.</p></div>';return;}
-localData=data.data||[];localResultados=data.resultados||{r1:"",r2:"",r3:"",r4:""};
+localData=data.data||[];
+var res=data.resultados||{};
+localResultados={
+  r1:res.r1||"",r2:res.r2||"",r3:res.r3||"",r4:res.r4||"",
+  ecu1:res.ecu1||"",ecu2:res.ecu2||"",ecu3:res.ecu3||"",
+  pan1:res.pan1||"",pan2:res.pan2||"",pan3:res.pan3||"",
+  usa1:res.usa1||"",usa2:res.usa2||"",usa3:res.usa3||""
+};
 renderRanking(localData,localResultados);
 });
 }
@@ -1264,9 +1200,8 @@ content.innerHTML=html;
 
 var SCORES={ecu1h:0,ecu1a:0,ecu2h:0,ecu2a:0,ecu3h:0,ecu3a:0,pan1h:0,pan1a:0,pan2h:0,pan2a:0,pan3h:0,pan3a:0,usa1h:0,usa1a:0,usa2h:0,usa2a:0,usa3h:0,usa3a:0};
 function scoreVal(hid,aid){
+  // Siempre registrar el marcador; si no se tocó, guardar "0-0" (predicción válida)
   var h=SCORES[hid]||0, a=SCORES[aid]||0;
-  var hMod=SCORES_TOUCHED[hid]||false, aMod=SCORES_TOUCHED[aid]||false;
-  if(!hMod&&!aMod) return "";
   return h+"-"+a;
 }
 var SCORES_TOUCHED={};
@@ -1305,7 +1240,13 @@ return;
 }
 if(!listaEl)return;
 localData=data.data||[];
-localResultados=data.resultados||{r1:"",r2:"",r3:"",r4:""};
+var res=data.resultados||{};
+localResultados={
+  r1:res.r1||"",r2:res.r2||"",r3:res.r3||"",r4:res.r4||"",
+  ecu1:res.ecu1||"",ecu2:res.ecu2||"",ecu3:res.ecu3||"",
+  pan1:res.pan1||"",pan2:res.pan2||"",pan3:res.pan3||"",
+  usa1:res.usa1||"",usa2:res.usa2||"",usa3:res.usa3||""
+};
 // Stats
 document.getElementById("stat-participantes").textContent=localData.length;
 // Actualizar stats adicionales
@@ -1375,13 +1316,12 @@ return;
 var sorted=participants.slice().sort(function(a,b){return calcularPuntosLocal(b,localResultados)-calcularPuntosLocal(a,localResultados);});
 var html='<p style="font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:700;">'+sorted.length+' colaborador'+(sorted.length!==1?'es':'')+totalStr+'</p>';
 html+='<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">';
-html+='<table class="ranking-table" style="min-width:720px;"><thead><tr>';
-html+='<th style="text-align:center;width:40px;">#</th>';
-html+='<th>Nombre</th>';
-html+='<th>Cédula</th>';
+html+='<table class="ranking-table" style="min-width:700px;"><thead><tr>';
+html+='<th style="text-align:center;width:36px;">#</th>';
+html+='<th>Nombre / Cédula</th>';
 html+='<th>País</th>';
-html+='<th>Pronóstico Final</th>';
-html+='<th>Marcadores Ecu/Pan/USA</th>';
+html+='<th>🏆 Pronóstico Final</th>';
+html+='<th style="text-align:center;">⚽ Marcadores</th>';
 html+='<th style="text-align:center;">Fecha</th>';
 html+='<th style="text-align:right;">Pts</th>';
 html+='</tr></thead><tbody>';
@@ -1391,27 +1331,41 @@ var p=sorted[i];
 var pos=i+1;
 var posColor=pos===1?"var(--gold)":pos===2?"var(--silver)":pos===3?"var(--bronze)":"var(--muted)";
 var medal=pos===1?"🥇":pos===2?"🥈":pos===3?"🥉":pos;
+var pts=calcularPuntosLocal(p,localResultados);
+var rid='row-detail-'+i;
+// Marcadores compactos con color si coinciden con el real
+function mTag(pred,real,flag){
+  // "0-0" es marcador válido — coincidencia si ambos son iguales y no están vacíos
+  var match=(real!=null&&real!==''&&pred!=null&&pred!=='')&&String(real)===String(pred);
+  var bg=match?'#d4edda':'#f8f9fa';var color=match?'#155724':'#555';
+  return '<span style="background:'+bg+';color:'+color+';border-radius:4px;padding:1px 4px;font-size:10px;font-weight:700;white-space:nowrap;">'+flag+' '+(pred||'–')+'</span>';
+}
+var marcadores='<div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;">'+
+  mTag(p.ecu1,localResultados.ecu1,'🇨🇮v🇪🇨')+
+  mTag(p.ecu2,localResultados.ecu2,'🇪🇨v🇨🇼')+
+  mTag(p.ecu3,localResultados.ecu3,'🇪🇨v🇩🇪')+
+  mTag(p.pan1,localResultados.pan1,'🇬🇭v🇵🇦')+
+  mTag(p.pan2,localResultados.pan2,'🇵🇦v🇭🇷')+
+  mTag(p.pan3,localResultados.pan3,'🇵🇦v🏴󠁧󠁢󠁥󠁮󠁧󠁿')+
+  mTag(p.usa1,localResultados.usa1,'🇺🇸v🇵🇾')+
+  mTag(p.usa2,localResultados.usa2,'🇺🇸v🇦🇺')+
+  mTag(p.usa3,localResultados.usa3,'🇹🇷v🇺🇸')+
+'</div>';
 html+='<tr class="rank-row" style="border-left:3px solid '+(pos<=3?posColor:'transparent')+'">';
-html+='<td style="font-family:\'Nunito\',sans-serif;font-size:'+(pos<=3?'18':'14')+'px;font-weight:900;text-align:center;color:'+posColor+';">'+medal+'</td>';
-html+='<td><strong style="font-family:\'Nunito\',sans-serif;font-size:14px;">'+escHtml(p.nombre||'–')+'</strong></td>';
-html+='<td style="font-size:12px;color:var(--muted);white-space:nowrap;">'+escHtml(p.cedula||p.contacto||'–')+'</td>';
-html+='<td style="font-size:12px;color:var(--text2);white-space:nowrap;">'+escHtml(p.pais||'–')+'</td>';
-html+='<td><div class="prediction-mini"><span class="mini-tag mini-1">🥇 '+escHtml(p.pred1||'?')+'</span><span class="mini-tag mini-2">🥈 '+escHtml(p.pred2||'?')+'</span><span class="mini-tag mini-3">🥉 '+escHtml(p.pred3||'?')+'</span><span class="mini-tag mini-4">4️⃣ '+escHtml(p.pred4||'?')+'</span></div></td>';
-html+='<td style="font-size:11px;color:var(--muted);white-space:nowrap;"><div style="display:flex;flex-direction:column;gap:2px;">'+
-'<span>🇨🇮v🇪🇨 '+fmtScore(p.ecu1)+'</span>'+
-'<span>🇪🇨v🇨🇼 '+fmtScore(p.ecu2)+'</span>'+
-'<span>🇪🇨v🇩🇪 '+fmtScore(p.ecu3)+'</span>'+
-'<span>🇬🇭v🇵🇦 '+fmtScore(p.pan1)+'</span>'+
-'<span>🇵🇦v🇭🇷 '+fmtScore(p.pan2)+'</span>'+
-'<span>🇵🇦v🏴󠁧󠁢󠁥󠁮󠁧󠁿 '+fmtScore(p.pan3)+'</span>'+
-'<span>🇺🇸v🇵🇾 '+fmtScore(p.usa1)+'</span>'+
-'<span>🇺🇸v🇦🇺 '+fmtScore(p.usa2)+'</span>'+
-'<span>🇹🇷v🇺🇸 '+fmtScore(p.usa3)+'</span>'+
+html+='<td style="font-size:'+(pos<=3?'17':'13')+'px;font-weight:900;text-align:center;color:'+posColor+';">'+medal+'</td>';
+html+='<td><strong style="font-size:13px;">'+escHtml(p.nombre||'–')+'</strong><br><span style="font-size:11px;color:var(--muted);">'+escHtml(p.cedula||p.contacto||'–')+'</span></td>';
+html+='<td style="font-size:12px;white-space:nowrap;">'+escHtml(p.pais||'–')+'</td>';
+html+='<td><div style="display:flex;flex-direction:column;gap:2px;font-size:11px;">'+
+  '<span><strong>🥇</strong> '+escHtml(p.pred1||'?')+'</span>'+
+  '<span><strong>🥈</strong> '+escHtml(p.pred2||'?')+'</span>'+
+  '<span><strong>🥉</strong> '+escHtml(p.pred3||'?')+'</span>'+
+  '<span><strong>4️⃣</strong> '+escHtml(p.pred4||'?')+'</span>'+
 '</div></td>';
+html+='<td style="text-align:center;">'+marcadores+'</td>';
 html+='<td style="font-size:11px;color:var(--muted);text-align:center;white-space:nowrap;">'+escHtml(p.fecha||'–')+'</td>';
-html+='<td style="text-align:right;"><span class="score-pill">'+calcularPuntosLocal(p,localResultados)+'</span></td>';
+html+='<td style="text-align:right;"><span class="score-pill">'+pts+'</span></td>';
 html+='</tr>';
-}catch(rowErr){html+='<tr><td colspan="8" style="color:red;font-size:11px;">Error fila '+i+': '+String(rowErr)+'</td></tr>';}
+}catch(rowErr){html+='<tr><td colspan="7" style="color:red;font-size:11px;">Error fila '+i+': '+String(rowErr)+'</td></tr>';}
 }
 html+='</tbody></table></div>';
 el.innerHTML=html;
@@ -1468,12 +1422,17 @@ function guardarResultados(){
 var r1=document.getElementById("res-1").value;var r2=document.getElementById("res-2").value;
 var r3=document.getElementById("res-3").value;var r4=document.getElementById("res-4").value;
 showLoading("Guardando y recalculando…");
-apiPost({action:"saveResultados",r1:r1,r2:r2,r3:r3,r4:r4},function(err,data){
+// Incluir marcadores actuales para que el recálculo no los pierda
+var body={action:"saveResultados",r1:r1,r2:r2,r3:r3,r4:r4,
+  ecu1:localResultados.ecu1||"", ecu2:localResultados.ecu2||"", ecu3:localResultados.ecu3||"",
+  pan1:localResultados.pan1||"", pan2:localResultados.pan2||"", pan3:localResultados.pan3||"",
+  usa1:localResultados.usa1||"", usa2:localResultados.usa2||"", usa3:localResultados.usa3||""};
+apiPost(body,function(err,data){
 hideLoading();var alertEl=document.getElementById("alert-resultado");
 if(err||!data||!data.ok){showAlert(alertEl,"error","⚠️ Error al guardar. Intenta de nuevo.");return;}
 if(r1)localResultados.r1=r1;if(r2)localResultados.r2=r2;
 if(r3)localResultados.r3=r3;if(r4)localResultados.r4=r4;
-showAlert(alertEl,"success","✅ Resultados guardados y puntos recalculados en Google Sheets.");
+showAlert(alertEl,"success","✅ Resultados guardados y puntos recalculados correctamente.");
 cargarAdminLista();
 });
 }
@@ -1572,306 +1531,6 @@ container.innerHTML=html;
 }
 document.addEventListener('DOMContentLoaded', function(){ init(); });
 
-var APPS_SCRIPT_CODE = `// ============================================================
-// POLLA MUNDIALISTA PRONACA — Apps Script (versión con USA)
-// Reemplaza TODO el código en Extensiones → Apps Script
-// ============================================================
-
-var SHEET_NAME = "Participantes";
-var CONFIG_SHEET = "Config";
-
-function doPost(e) {
-  try {
-    var body = JSON.parse(e.postData.contents);
-    var action = body.action;
-
-    if (action === "register") {
-      return registrar(body);
-    } else if (action === "saveMarcadores") {
-      return guardarMarcadoresYRecalcular(body);
-    } else if (action === "saveResultados") {
-      return guardarResultadosFinales(body);
-    }
-    return resp({ok: false, error: "Acción desconocida"});
-  } catch(err) {
-    return resp({ok: false, error: err.toString()});
-  }
-}
-
-function doGet(e) {
-  try {
-    var action = e.parameter.action;
-    if (action === "getAll") return getAll();
-    return resp({ok: false, error: "Acción desconocida"});
-  } catch(err) {
-    return resp({ok: false, error: err.toString()});
-  }
-}
-
-// ── REGISTRO ──────────────────────────────────────────────
-function registrar(body) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(SHEET_NAME);
-  var cedula = String(body.cedula || body.contacto || "").replace(/\D/g,'');
-
-  // Verificar duplicado
-  var data = sheet.getDataRange().getValues();
-  for (var i = 1; i < data.length; i++) {
-    if (String(data[i][1]).replace(/\D/g,'') === cedula) {
-      return resp({ok: false, error: "duplicado"});
-    }
-  }
-
-  var now = new Date().toLocaleDateString("es-EC");
-  sheet.appendRow([
-    body.nombre, cedula, body.pais,
-    body.pred1, body.pred2, body.pred3, body.pred4,
-    body.ecu1||"0-0", body.ecu2||"0-0", body.ecu3||"0-0",
-    body.pan1||"0-0", body.pan2||"0-0", body.pan3||"0-0",
-    body.usa1||"0-0", body.usa2||"0-0", body.usa3||"0-0",
-    0, now
-  ]);
-  return resp({ok: true});
-}
-
-// ── GUARDAR MARCADORES REALES Y RECALCULAR PUNTOS ─────────
-function guardarMarcadoresYRecalcular(body) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var cfg = ss.getSheetByName(CONFIG_SHEET);
-  var sheet = ss.getSheetByName(SHEET_NAME);
-
-  // Guardar marcadores reales en Config
-  cfg.getRange("B1").setValue(body.ecu1||"0-0");
-  cfg.getRange("B2").setValue(body.ecu2||"0-0");
-  cfg.getRange("B3").setValue(body.ecu3||"0-0");
-  cfg.getRange("B4").setValue(body.pan1||"0-0");
-  cfg.getRange("B5").setValue(body.pan2||"0-0");
-  cfg.getRange("B6").setValue(body.pan3||"0-0");
-  cfg.getRange("B7").setValue(body.usa1||"0-0");  // ← USA partido 1
-  cfg.getRange("B8").setValue(body.usa2||"0-0");  // ← USA partido 2
-  cfg.getRange("B9").setValue(body.usa3||"0-0");  // ← USA partido 3
-  if(body.r1) cfg.getRange("B10").setValue(body.r1);
-  if(body.r2) cfg.getRange("B11").setValue(body.r2);
-  if(body.r3) cfg.getRange("B12").setValue(body.r3);
-  if(body.r4) cfg.getRange("B13").setValue(body.r4);
-
-  // Recalcular puntos para cada participante
-  var reales = {
-    ecu1: cfg.getRange("B1").getValue(),
-    ecu2: cfg.getRange("B2").getValue(),
-    ecu3: cfg.getRange("B3").getValue(),
-    pan1: cfg.getRange("B4").getValue(),
-    pan2: cfg.getRange("B5").getValue(),
-    pan3: cfg.getRange("B6").getValue(),
-    usa1: cfg.getRange("B7").getValue(),
-    usa2: cfg.getRange("B8").getValue(),
-    usa3: cfg.getRange("B9").getValue(),
-    r1:   cfg.getRange("B10").getValue(),
-    r2:   cfg.getRange("B11").getValue(),
-    r3:   cfg.getRange("B12").getValue(),
-    r4:   cfg.getRange("B13").getValue()
-  };
-
-  var rows = sheet.getDataRange().getValues();
-  for (var i = 1; i < rows.length; i++) {
-    var pts = calcularPuntos(rows[i], reales);
-    sheet.getRange(i + 1, 17).setValue(pts); // columna Q = puntos
-  }
-
-  return resp({ok: true});
-}
-
-// ── CALCULAR PUNTOS DE UN PARTICIPANTE ────────────────────
-// Columnas: 0=nombre, 1=cedula, 2=pais,
-//           3=pred1, 4=pred2, 5=pred3, 6=pred4,
-//           7=ecu1, 8=ecu2, 9=ecu3,
-//           10=pan1, 11=pan2, 12=pan3,
-//           13=usa1, 14=usa2, 15=usa3,
-//           16=puntos, 17=fecha
-function calcularPuntos(row, r) {
-  var pts = 0;
-  // Fase final
-  if (r.r1 && row[3] === r.r1) pts += 65;
-  if (r.r2 && row[4] === r.r2) pts += 30;
-  if (r.r3 && row[5] === r.r3) pts += 20;
-  if (r.r4 && row[6] === r.r4) pts += 10;
-  // Marcadores fase de grupos (5 pts c/u) — 0-0 ES válido
-  var pairs = [
-    [r.ecu1, row[7]],  // Ecuador partido 1
-    [r.ecu2, row[8]],  // Ecuador partido 2
-    [r.ecu3, row[9]],  // Ecuador partido 3
-    [r.pan1, row[10]], // Panamá partido 1
-    [r.pan2, row[11]], // Panamá partido 2
-    [r.pan3, row[12]], // Panamá partido 3
-    [r.usa1, row[13]], // USA partido 1  ← NUEVO
-    [r.usa2, row[14]], // USA partido 2  ← NUEVO
-    [r.usa3, row[15]]  // USA partido 3  ← NUEVO
-  ];
-  for (var j = 0; j < pairs.length; j++) {
-    var real = String(pairs[j][0] || "").trim();
-    var pred = String(pairs[j][1] || "").trim();
-    if (real !== "" && real !== "0-0" && pred !== "" && real === pred) pts += 5;
-    // Caso especial: si el real ES 0-0 y el usuario predijo 0-0 → 5 pts
-    if (real === "0-0" && pred === "0-0") pts += 5;
-  }
-  return pts;
-}
-
-// ── GUARDAR SOLO RESULTADOS FINALES ───────────────────────
-function guardarResultadosFinales(body) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var cfg = ss.getSheetByName(CONFIG_SHEET);
-  if(body.r1) cfg.getRange("B10").setValue(body.r1);
-  if(body.r2) cfg.getRange("B11").setValue(body.r2);
-  if(body.r3) cfg.getRange("B12").setValue(body.r3);
-  if(body.r4) cfg.getRange("B13").setValue(body.r4);
-  // Recalcular usando marcadores ya guardados
-  return guardarMarcadoresYRecalcular({
-    ecu1: cfg.getRange("B1").getValue(),
-    ecu2: cfg.getRange("B2").getValue(),
-    ecu3: cfg.getRange("B3").getValue(),
-    pan1: cfg.getRange("B4").getValue(),
-    pan2: cfg.getRange("B5").getValue(),
-    pan3: cfg.getRange("B6").getValue(),
-    usa1: cfg.getRange("B7").getValue(),
-    usa2: cfg.getRange("B8").getValue(),
-    usa3: cfg.getRange("B9").getValue(),
-    r1: body.r1, r2: body.r2, r3: body.r3, r4: body.r4
-  });
-}
-
-// ── OBTENER TODOS LOS DATOS ───────────────────────────────
-function getAll() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var cfg = ss.getSheetByName(CONFIG_SHEET);
-  var sheet = ss.getSheetByName(SHEET_NAME);
-  var rows = sheet.getDataRange().getValues();
-
-  var resultados = {
-    ecu1: String(cfg.getRange("B1").getValue()||""),
-    ecu2: String(cfg.getRange("B2").getValue()||""),
-    ecu3: String(cfg.getRange("B3").getValue()||""),
-    pan1: String(cfg.getRange("B4").getValue()||""),
-    pan2: String(cfg.getRange("B5").getValue()||""),
-    pan3: String(cfg.getRange("B6").getValue()||""),
-    usa1: String(cfg.getRange("B7").getValue()||""),
-    usa2: String(cfg.getRange("B8").getValue()||""),
-    usa3: String(cfg.getRange("B9").getValue()||""),
-    r1:   String(cfg.getRange("B10").getValue()||""),
-    r2:   String(cfg.getRange("B11").getValue()||""),
-    r3:   String(cfg.getRange("B12").getValue()||""),
-    r4:   String(cfg.getRange("B13").getValue()||"")
-  };
-
-  var data = [];
-  for (var i = 1; i < rows.length; i++) {
-    var r = rows[i];
-    if (!r[0]) continue;
-    data.push({
-      nombre:  r[0],  cedula:  r[1],  pais:    r[2],
-      pred1:   r[3],  pred2:   r[4],  pred3:   r[5],  pred4: r[6],
-      ecu1:    r[7],  ecu2:    r[8],  ecu3:    r[9],
-      pan1:    r[10], pan2:    r[11], pan3:    r[12],
-      usa1:    r[13], usa2:    r[14], usa3:    r[15],
-      puntos:  r[16], fecha:   r[17]
-    });
-  }
-
-  return resp({ok: true, data: data, resultados: resultados});
-}
-
-// ── HELPER ────────────────────────────────────────────────
-function resp(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}`;
-
-function copiarAppsScript(){
-  var code=document.getElementById("apps-script-code");
-  if(!code)return;
-  navigator.clipboard.writeText(APPS_SCRIPT_CODE).then(function(){
-    var c=document.getElementById("copy-confirm");if(c){c.style.display='block';setTimeout(function(){c.style.display='none';},3000);}
-  }).catch(function(){
-    // Fallback para Safari/iOS
-    var ta=document.createElement('textarea');ta.value=APPS_SCRIPT_CODE;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
-    var c=document.getElementById("copy-confirm");if(c){c.style.display='block';setTimeout(function(){c.style.display='none';},3000);}
-  });
-}
-
-function renderAppsScriptCode(){
-  try{
-    var el=document.getElementById("apps-script-code");
-    if(el&&!el.textContent)el.textContent=APPS_SCRIPT_CODE;
-  }catch(e){}
-}
-
-
-function diagLog(msg, ok){
-  var el=document.getElementById("diag-result");
-  if(!el)return;
-  el.style.display='block';
-  var ts=new Date().toLocaleTimeString("es-EC");
-  var color=ok===true?'#a6e3a1':ok===false?'#f38ba8':'#cdd6f4';
-  el.innerHTML+='<span style="color:'+color+';">['+ts+'] '+msg+'</span>\n';
-  el.scrollTop=el.scrollHeight;
-}
-
-function testConexion(){
-  var el=document.getElementById("diag-result");
-  if(el){el.innerHTML='';el.style.display='block';}
-  diagLog('Iniciando prueba GET a: '+API_URL);
-  var url=API_URL+"?action=getAll&v="+Date.now();
-  diagLog('URL completa: '+url);
-  fetch(url)
-    .then(function(r){
-      diagLog('HTTP status: '+r.status+' '+r.statusText, r.ok);
-      return r.text();
-    })
-    .then(function(txt){
-      diagLog('Respuesta cruda (primeros 500 chars):\n'+txt.substring(0,500));
-      try{
-        var j=JSON.parse(txt);
-        diagLog('JSON válido ✓ — ok:'+j.ok+' — participantes:'+(j.data?j.data.length:'?'), j.ok);
-        if(j.data&&j.data.length>0){
-          diagLog('Primer participante: '+JSON.stringify(j.data[0]).substring(0,200), true);
-        }
-        if(j.error) diagLog('Error del servidor: '+j.error, false);
-      }catch(e){
-        diagLog('No es JSON válido. Puede ser página de error de Google o redirección.', false);
-      }
-    })
-    .catch(function(e){
-      diagLog('Error de red (CORS, timeout, URL inválida): '+String(e), false);
-      diagLog('Solución: verifica que el Apps Script esté publicado como "Cualquier usuario" y con acceso "Cualquiera".', false);
-    });
-}
-
-function testConexionPost(){
-  var el=document.getElementById("diag-result");
-  if(el){el.innerHTML='';el.style.display='block';}
-  diagLog('Iniciando prueba POST a: '+API_URL);
-  fetch(API_URL,{
-    method:'POST',
-    body:JSON.stringify({action:'ping',test:true})
-  })
-    .then(function(r){
-      diagLog('HTTP status POST: '+r.status+' '+r.statusText, r.ok);
-      return r.text();
-    })
-    .then(function(txt){
-      diagLog('Respuesta POST:\n'+txt.substring(0,500));
-      try{
-        var j=JSON.parse(txt);
-        diagLog('JSON válido ✓ — ok:'+j.ok, j.ok);
-      }catch(e){
-        diagLog('Respuesta no es JSON.', false);
-      }
-    })
-    .catch(function(e){
-      diagLog('Error de red POST: '+String(e), false);
-    });
-}
 
 </script>
 
@@ -1883,5 +1542,6 @@ function testConexionPost(){
   Esta aplicación no está conectada a redes internas, Active Directory, VPN ni sistemas corporativos.
 </footer>
 
+</div><!-- /container -->
 </body>
 </html>
